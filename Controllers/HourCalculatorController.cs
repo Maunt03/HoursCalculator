@@ -5,6 +5,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using System.Net;
 
 namespace HoursCalculator.Controllers
 {
@@ -30,11 +31,23 @@ namespace HoursCalculator.Controllers
 
             Events events = GoogleCalendarAPI.CalculateHours(startDate, endDate);
             if (events == null) return StatusCode(500);
+            Dictionary<string, int> tutors = new Dictionary<string, int>();
             foreach (var item in events.Items)
             {
-                /*to do*/
+                string tutorName = item.Summary.Split('(', ')')[1].Split(',')[0].Trim();
+                if (tutors.ContainsKey(tutorName))
+                {
+                    tutors[tutorName]++;
+                }
+                else
+                {
+                    tutors.Add(tutorName, 1);
+                }
             }
-
+            foreach (var item in tutors)
+            {
+                Console.WriteLine(item.Key + " " + item.Value);
+            }
             return View();
         }
     }
