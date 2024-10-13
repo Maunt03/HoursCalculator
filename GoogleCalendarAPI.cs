@@ -41,8 +41,8 @@ namespace HoursCalculator
 
                 // Define parameters of request.
                 EventsResource.ListRequest request = service.Events.List("primary");
-                request.TimeMin = startDate;
-                request.TimeMax = endDate;
+                request.TimeMin = startDate.AddDays(-1);
+                request.TimeMax = endDate.AddDays(1);
                 request.ShowDeleted = false;
                 request.SingleEvents = true;
                 request.MaxResults = 10;
