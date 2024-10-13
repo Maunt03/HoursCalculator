@@ -1,0 +1,8 @@
+﻿@model Dictionary<string, int>
+<ul>
+    @foreach (var tutor in Model)
+    {
+        <li>@tutor.Key @tutor.Value</li>
+    }
+</ul>
+

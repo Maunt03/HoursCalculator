@@ -9,10 +9,10 @@ using System.Net;
 
 namespace HoursCalculator.Controllers
 {
-    public class HourCalculatorController : Controller
+    public class HoursCalculatorController : Controller
     {
-        [HttpGet]
-        [Route("HourCalculator/Index")]
+        [HttpPost]
+        [Route("HoursCalculator/Index")]
         public IActionResult Index()
         {
             DateTime startDate;
@@ -20,8 +20,8 @@ namespace HoursCalculator.Controllers
 
             try
             {
-                startDate = DateTime.ParseExact(HttpContext.Request.Query["startDate"], "dd.M.yyyy", null);
-                endDate = DateTime.ParseExact(HttpContext.Request.Query["endDate"], "dd.M.yyyy", null);
+                startDate = DateTime.ParseExact(HttpContext.Request.Form["startDate"], "dd.M.yyyy", null);
+                endDate = DateTime.ParseExact(HttpContext.Request.Form["endDate"], "dd.M.yyyy", null);
             }
             catch
             {
@@ -48,7 +48,7 @@ namespace HoursCalculator.Controllers
             {
                 Console.WriteLine(item.Key + " " + item.Value);
             }
-            return View();
+            return View(tutors);
         }
     }
 }
